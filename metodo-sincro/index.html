@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
@@ -279,8 +279,8 @@
         /* METHOD GRID */
         .method-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
             margin: 3rem 0;
             max-width: 900px;
             width: 100%;
@@ -321,15 +321,27 @@
         /* PROGRESS INDICATOR */
         .progress {
             position: fixed;
-            top: 20px;
+            bottom: 20px;
             right: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 1rem;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 215, 0, 0.4);
+            border-radius: 25px;
+            padding: 0.8rem 1.5rem;
             z-index: 1000;
             color: #FFD700;
             font-weight: bold;
+            font-size: 0.9rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        .progress:hover {
+            background: rgba(0, 0, 0, 1);
+            transform: scale(1.05);
+            border-color: rgba(255, 215, 0, 0.6);
         }
 
         /* RESPONSIVE */
@@ -357,6 +369,24 @@
                 font-size: 1.2rem;
                 width: 90%;
             }
+
+            .progress {
+                bottom: 15px;
+                right: 15px;
+                padding: 0.6rem 1.2rem;
+                font-size: 0.8rem;
+                border-radius: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .progress {
+                bottom: 10px;
+                right: 10px;
+                padding: 0.5rem 1rem;
+                font-size: 0.75rem;
+                border-radius: 18px;
+            }
         }
 
         /* COLORS */
@@ -365,6 +395,23 @@
         .text-cyan { color: #4ECDC4; }
         .text-white { color: white; }
         .text-black { color: black; }
+
+        /* IMAGES */
+        .logo-img {
+            max-width: 100%;
+            height: auto;
+            transition: all 0.3s ease;
+        }
+
+        .profile-img {
+            border: 3px solid #4ECDC4;
+            transition: all 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+            border-color: #FFD700;
+        }
 
         /* CONSEQUENCES LIST */
         .consequences-list {
@@ -407,6 +454,10 @@
 
     <!-- STEP 1: PORTAL -->
     <section class="section bg-portal active" id="section1">
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">⚽</div>
+        </div>
+        
         <h1 class="main-title">Il Futuro di Tuo Figlio Inizia Qui</h1>
         
         <div class="subtitle">
@@ -435,16 +486,19 @@
         
         <div class="truth-card">
             <div class="stat-number">90%</div>
-            <h3 class="text-gold" style="font-size: clamp(1.5rem, 4vw, 2.2rem); margin-bottom: 2rem;">
-                dei ragazzi che giocano a calcio abbandonano entro i 18 anni
+            <h3 class="text-gold" style="font-size: clamp(1.5rem, 4vw, 2.2rem); margin-bottom: 2rem; font-weight: bold;">
+                dei ragazzi che iniziano a giocare a calcio smettono prima di realizzare il loro potenziale
             </h3>
-            <p style="font-size: clamp(1.2rem, 3vw, 1.6rem); margin-bottom: 2rem;">
+            <p style="font-size: clamp(1.2rem, 3vw, 1.6rem); margin-bottom: 2rem; line-height: 1.8;">
                 Non per mancanza di talento.<br>
                 Non per mancanza di passione.<br>
                 Non per mancanza di allenamento.
             </p>
-            <p class="text-cyan" style="font-size: clamp(1.3rem, 3vw, 1.8rem); font-weight: bold;">
-                Ma per qualcosa che NESSUNO insegna mai...
+            <p style="font-size: clamp(1.3rem, 3.5vw, 1.8rem); margin-bottom: 1.5rem; line-height: 1.7;">
+                👉 Ma perché <strong class="text-cyan">nessuno li ha mai aiutati ad allenare davvero la loro mente.</strong>
+            </p>
+            <p class="text-red" style="font-size: clamp(1.2rem, 3vw, 1.6rem); font-weight: bold; font-style: italic;">
+                E spesso... nemmeno i genitori sapevano come farlo.
             </p>
         </div>
 
@@ -666,7 +720,7 @@
             <p style="font-size: clamp(1.2rem, 3vw, 1.6rem); margin-bottom: 2rem;">
                 🧠 <strong>Neuroplasticità al picco:</strong> Il cervello di tuo figlio è ancora malleabile<br>
                 ⏰ <strong>3 mesi cruciali:</strong> L'estate per trasformare completamente il suo approccio<br>
-                🎯 <strong>Età critica:</strong> Dopo i 15 anni diventa 10 volte più difficile
+                🎯 <strong>Età critica:</strong> Dopo i 18 anni diventa 10 volte più difficile
             </p>
             <p class="text-red" style="font-size: clamp(1.3rem, 3vw, 1.7rem); font-weight: bold;">
                 Dopo settembre... potrebbe essere troppo tardi per sempre.
@@ -710,7 +764,7 @@
                     </p>
                     <p style="font-size: clamp(1.1rem, 2.5vw, 1.4rem);">
                         Lavoriamo sempre per <strong class="text-gold">ottimizzare l'aspetto mentale</strong><br>
-                        perché la mente controlla <strong class="text-cyan">corpo</strong> ed <strong class="text-red">emozioni</strong>
+                        perché la mente controlla le <strong class="text-cyan">emozioni</strong> e le <strong class="text-red">prestazioni</strong>
                     </p>
                 </div>
             </div>
@@ -724,7 +778,7 @@
     <!-- STEP 10: METHOD EXPLANATION -->
     <section class="section bg-method hidden" id="section10">
         <h2 class="section-title">
-            I 3 Pilastri del Metodo Sincro
+            I 2 Pilastri del Metodo Sincro
         </h2>
 
         <div style="text-align: center; margin-bottom: 3rem;">
@@ -733,7 +787,7 @@
             </p>
             <p style="font-size: clamp(1.2rem, 3vw, 1.6rem); margin-bottom: 2rem;">
                 Nel Metodo Sincro lavoriamo sempre per <strong class="text-cyan">ottimizzare l'aspetto mentale</strong><br>
-                perché sappiamo che la mente influenza <strong class="text-red">corpo</strong> ed <strong class="text-gold">emozioni</strong>
+                perché sappiamo che la mente influenza le <strong class="text-gold">emozioni</strong> e di conseguenza le <strong class="text-red">prestazioni</strong>
             </p>
         </div>
 
@@ -750,19 +804,6 @@
                 <strong>• Mentalità da campione</strong></p>
                 <div class="text-red" style="font-size: 0.8rem; margin-top: 1rem; font-weight: bold;">
                     🎯 PRIORITÀ #1 - Il Fondamento di Tutto
-                </div>
-            </div>
-            <div class="method-card" style="border-color: rgba(76, 201, 196, 0.3);">
-                <div class="method-emoji">⚽</div>
-                <h4 class="method-title text-cyan">CORPO ECCELLENTE</h4>
-                <p style="font-size: 0.9rem; line-height: 1.5;">
-                <strong>• Tecnica personalizzata</strong> per il suo ruolo<br>
-                <strong>• Coordinazione avanzata</strong> e agilità<br>
-                <strong>• Forza funzionale</strong> e resistenza<br>
-                <strong>• Prevenzione infortuni</strong> scientifica<br>
-                <strong>• Performance atletiche</strong> superiori</p>
-                <div class="text-cyan" style="font-size: 0.8rem; margin-top: 1rem; font-style: italic;">
-                    Usare la mente per allenare il corpo
                 </div>
             </div>
             <div class="method-card" style="border-color: rgba(255, 215, 0, 0.3);">
@@ -783,12 +824,12 @@
         <div style="text-align: center; margin-top: 3rem;">
             <div style="background: rgba(255, 107, 107, 0.15); border: 2px solid #FF6B6B; border-radius: 20px; padding: 2rem; max-width: 700px; margin: 0 auto 2rem;">
                 <p class="text-gold" style="font-size: clamp(1.3rem, 3vw, 1.7rem); font-weight: bold; margin-bottom: 1rem;">
-                    🧠 → ⚽ → 🎯
+                    🧠 → 🎯
                 </p>
                 <p style="font-size: clamp(1.1rem, 2.5vw, 1.4rem);">
                     <strong class="text-cyan">Prima</strong> sviluppiamo la mentalità vincente,<br>
-                    <strong class="text-cyan">poi</strong> usiamo la mente per allenare il corpo,<br>
-                    <strong class="text-cyan">infine</strong> le emozioni si allineano naturalmente.
+                    <strong class="text-cyan">poi</strong> le emozioni si allineano naturalmente<br>
+                    e le <strong class="text-gold">prestazioni</strong> migliorano automaticamente.
                 </p>
             </div>
             <button class="btn" onclick="showStep(11)">
@@ -846,6 +887,17 @@
                     <p class="text-gold"><strong>- Roberto, papà di Matteo (13 anni)</strong></p>
                 </div>
             </div>
+
+            <!-- CHI SONO -->
+            <div style="background: rgba(76, 201, 196, 0.1); border: 2px solid rgba(76, 201, 196, 0.3); border-radius: 20px; padding: 2.5rem; margin: 3rem auto; max-width: 600px; text-align: center;">
+                <div style="font-size: 4rem; margin-bottom: 1rem;">👨‍⚕️</div>
+                <h4 class="text-cyan" style="font-size: 1.4rem; margin-bottom: 1rem;">Il Creatore del Metodo Sincro</h4>
+                <p style="font-size: 1rem; line-height: 1.6;">
+                    <strong class="text-gold">Specialista certificato</strong> in mental coaching sportivo<br>
+                    <strong class="text-cyan">Oltre 2.000 giovani atleti</strong> trasformati<br>
+                    <strong class="text-red">L'unico sistema</strong> che sincronizza mente ed emozioni
+                </p>
+            </div>
         </div>
 
         <button class="btn" onclick="showStep(12)">
@@ -855,6 +907,10 @@
 
     <!-- STEP 12: FINAL CTA -->
     <section class="section bg-final hidden" id="section12">
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">🏆</div>
+        </div>
+        
         <h2 class="section-title text-gold">
             La Tua Unica Possibilità
         </h2>
@@ -871,7 +927,7 @@
             </p>
             
             <p style="font-size: clamp(1.3rem, 3vw, 1.7rem); margin-bottom: 2rem;">
-                ✅ <strong>È un'analisi personalizada</strong> della situazione di tuo figlio<br>
+                ✅ <strong>È un'analisi personalizzata</strong> della situazione di tuo figlio<br>
                 ✅ <strong>È una strategia su misura</strong> per i suoi problemi specifici<br>
                 ✅ <strong>È una valutazione onesta</strong> se possiamo aiutarlo
             </p>
@@ -898,7 +954,7 @@
                 </h4>
                 <p style="font-size: 1.1rem;">
                     Ogni giorno che passa è un giorno in meno per sviluppare la mentalità vincente di tuo figlio.<br><br>
-                    L'estate 2025 è la sua <strong class="text-gold">ultima grande occasione</strong> prima che diventi troppo difficile.
+                    L'estate 2025 è una <strong class="text-gold">grande occasione</strong> per trasformare il suo approccio al calcio e alla vita.
                 </p>
             </div>
         </div>
