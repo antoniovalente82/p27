@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Protocol 27 - Infografica Futuristica</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0a23 0%, #1a1a3a 50%, #2d1b69 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            margin-bottom: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.03) 10px,
+                rgba(255,255,255,0.03) 20px
+            );
+            animation: float 20s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        .header h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 3.5em;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ffffff, #a8edea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255,255,255,0.5);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            margin-top: 10px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+        }
+        
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            box-shadow: 0 10px 20px rgba(255,107,107,0.3);
+        }
+        
+        .step-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .step {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .step:hover::before {
+            left: 100%;
+        }
+        
+        .step:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            border-color: #4ecdc4;
+        }
+        
+        .step-number {
+            background: linear-gradient(45deg, #48cae4, #023e8a);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+        
+        .step-title {
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            color: #a8edea;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .expand-icon {
+            font-size: 1.2em;
+            color: #4ecdc4;
+            transition: transform 0.3s ease;
+        }
+        
+        .objection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .objection {
+            background: linear-gradient(135deg, #ff6b6b20, #feca5720);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #ff6b6b;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .objection:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 20px rgba(255,107,107,0.2);
+        }
+        
+        .objection-title {
+            font-weight: 600;
+            color: #ff6b6b;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .price-highlight {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 20px 0;
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .price-highlight:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 60px rgba(102, 126, 234, 0.4);
+        }
+        
+        .price {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5em;
+            font-weight: 900;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(255,255,255,0.5);
+        }
+        
+        .mindset-box {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 20px;
+            text-align: center;
+            box-shadow: 0 15px 30px rgba(78, 205, 196, 0.3);
+        }
+        
+        .mindset-quote {
+            font-style: italic;
+            font-size: 1.2em;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        .checklist {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            transition: background 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .checklist-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #4ecdc4;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4ecdc4;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .checklist-item.checked .checkbox {
+            background: #4ecdc4;
+            color: #0a0a23;
+        }
+        
+        .power-phrases {
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+            color: #333;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+        
+        .phrase {
+            background: rgba(255,255,255,0.7);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-style: italic;
+            border-left: 4px solid #ff6b6b;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .phrase:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .phrase:last-child {
+            margin-bottom: 0;
+        }
+        
+        .discovery-questions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .question-group {
+            background: rgba(255,255,255,0.08);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.15);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .question-group:hover {
+            border-color: #4ecdc4;
+            box-shadow: 0 10px 20px rgba(78, 205, 196, 0.2);
+        }
+        
+        .question-group h4 {
+            color: #a8edea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .question {
+            background: rgba(255,255,255,0.05);
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        .question-group:hover .question {
+            opacity: 1;
+        }
+        
+        .uniqueness-highlight {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 2px solid #a8edea;
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+        }
+        
+        .uniqueness-highlight h4 {
+            color: #a8edea;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a3a, #2d1b69);
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .modal-close:hover {
+            color: #ff6b6b;
+        }
+        
+        .template-box {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #4ecdc4;
+        }
+        
+        .template-box h5 {
+            color: #4ecdc4;
+            margin-bottom: 10px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5em;
+            }
+            
+            .step-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .modal-content {
+                margin: 20px;
+                max-height: calc(100vh - 40px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>PROTOCOLLO 27</h1>
+            <div class="subtitle">Guida Sales Completa per Chiusure Efficaci</div>
+        </div>
+        
+        <!-- GESTIONE LEAD -->
+        <div class="section">
+            <div class="section-title">
+                <div class="icon">📞</div>
+                GESTIONE LEAD INIZIALE
+            </div>
+            <div class="step-grid">
+                <div class="step" onclick="openModal('lead-contact')">
+                    <div class="step-number">1</div>
+                    <div class="step-title">
+                        PRIMO CONTATTO
+                        <span class="expand-icon">▶</span>
+                    </div>
+                    <div class="step-content">
+                        <p><strong>Obiettivo:</strong> Fissare appuntamento videocall</p>
+                        <p>• Nuovo Lead → Chiamata immediata</p>
+                        <p>• Non risponde → Messaggio vocale strategico</p>
+                    </div>
+                </div>
+                <div class="step" onclick="openModal('lead-followup')">
+                    <div class="step-number">2</div>
+                    <div class="step-title">
+                        FOLLOW-UP NATURALE
+                        <span class="expand-icon">▶</span>
+                    </div>
+                    <div class="step-content">
+                        <p><strong>Obiettivo:</strong> Ricontatto semplice e diretto</p>
+                        <p>• 2 chiamate in orari diversi</p>
+                        <p>• Script seconda chiamata pronto</p>
+                    </div>
+                </div>
+                <div class="step" onclick="openModal('lead-reserve')">
+                    <div class="step-number">3</div>
+                    <div class="step-title">
+                        LISTA RISERVA
+                        <span class="expand-icon">▶</span>
+                    </div>
+                    <div class="step-content">
+                        <p><strong>Obiettivo:</strong> Recuperare lead "dormiente"</p>
+                        <p>• Lista "Lead Senza Risposta"</p>
+                        <p>• Chiamate nei tempi liberi</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- APERTURA CHIAMATA -->
+        <div class="section">
+            <div class="section-title">
+                <div class="icon">🎯</div>
+                APERTURA CHIAMATA
+            </div>
+            <div class="step-grid">
+                <div class="step" onclick="openModal('rapport')">
+                    <div class="step-number">1</div>
+                    <div class="step-title">
+                        RAPPORT E AUTORITÀ
+                        <span class="expand-icon">▶</span>
+                    </div>
+                    <div class="step-content">
+                        <p><strong>Atteggiamento Base:</strong></p>
+                        <p>• Sorriso genuino (si percepisce nella voce)</p>
+                        <p>• Energia contagiosa</p>
+                        <p>• Velocità moderata</p>
+                    </div>
+                </div>
+                <div class="step" onclick="openModal('framework')">
+                    <div class="step-number">2</div>
+                    <div class="step-title">
+                        FRAMEWORK DI CONTROLLO
+                        <span class="expand-icon">▶</span>
+                    </div>
+                    <div class="step-content">
+                        <p><strong>3 Step Strutturati:</strong></p>
+                        <p>1. Domande per capire la situazione</p>
+                        <p>2. Spiegazione del percorso</p>
+                        <p>3. Valutazione insieme</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- DISCOVERY -->
+        <div class="section">
+            <div class="section-title">
+                <div class="icon">🔍</div>
+                FASE DISCOVERY
+            </div>
+            <div class="discovery-questions">
+                <div class="question-group" onclick="openModal('discovery-opening')">
+                    <h4>Domande di Apertura <span class="expand-icon">▶</span></h4>
+                    <div class="question">"Di cosa ti occupi attualmente?"</div>
+                    <div class="question">"Cosa ti ha portato a cercare informazioni sul Mental Coaching?"</div>
+                    <div class="question">"Hai mai fatto coaching prima?"</div>
+                </div>
+                <div class="question-group" onclick="openModal('discovery-motivation')">
+                    <h4>Motivazione Profonda <span class="expand-icon">▶</span></h4>
+                    <div class="question">"Cosa ti piacerebbe che fosse diverso nella tua vita lavorativa?"</div>
+                    <div class="question">"Come sarebbe la tua situazione ideale tra due anni?"</div>
+                    <div class="question">"Cosa significa per te aiutare le altre persone?"</div>
+                </div>
+                <div class="question-group" onclick="openModal('discovery-practical')">
+                    <h4>Domande Pratiche <span class="expand-icon">▶</span></h4>
+                    <div class="question">"Hai mai investito in formazione per te stesso?"</div>
+                    <div class="question">"Che tipo di impegno puoi mettere?"</div>
+                    <div class="question">"Quando vorresti iniziare a lavorare come coach?"</div>
+                </div>
+            </div>
+            <div class="mindset-box">
+                <div class="mindset-quote">"2 ORECCHIE, 1 BOCCA → Fai parlare loro del loro dolore"</div>
+                <p>Le persone sono mosse più dalla paura di perdere che dal desiderio di guadagnare</p>
+            </div>
+        </div>
+        
+        <!-- PRESENTAZIONE SOLUZIONE -->
+        <div class="section">
+            <div class="section-title">
+                <div class="icon">💡</div>
+                PRESENTAZIONE SOLUZIONE
+            </div>
+            
+            <div class="uniqueness-highlight">
+                <h4>🌟 LA NOSTRA UNICITÀ - COSA CI DISTINGUE DA TUTTI GLI ALTRI</h4>
+                <p style="text-align: center; font-style: italic; margin-bottom: 15px;">
+                    "A differenza degli altri, noi siamo una società di coaching che per necessità ha creato una scuola di formazione"
+                </p>
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
+                    <strong>🎯 FACCIAMO CIÒ CHE INSEGNAMO</strong> - Siamo coach attivi, non solo formatori<br>
+                    <strong>⚡ LEARNING BY DOING</strong> - Programma basato sull'"impara facendo", non teoria<br>
+                    <strong>🚀 COMPETENZE + BUSINESS</strong> - Questo mese hai 1M COACH incluso per lanciare la tua attività
+                </div>
+            </div>
+            
+            <div class="step-grid">
+                <div class="step" onclick="openModal('solution-transition')">
+                    <div class="step-number">1</div>
+                    <div class="step-title">
+                        TRANSIZIONE NATURALE
+                        <span class="expand-icon">▶</span>
+                    </div>
+                    <div class="step-content">
+                        <p>"Da quello che mi hai raccontato, credo che possiamo davvero aiutarti. Ti spiego quello che facciamo..."</p>
+                    </div>
+                </div>
+                <div class="step" onclick="openModal('solution-story')">
+                    <div class="step-number">2</div>
+                    <div class="step-title">
+                        STORY TELLING + SOCIAL PROOF
+                        <span class="expand-icon">▶</span>
+                    </div>
+                    <div class="step-content">
+                        <p>• Protocollo 27 + METODO SINCRO</p>
+                        <p>• Focus su coaching pratico</p>
+                        <p>• "Da qui esci e sei un coach pronto"</p>
+                    </div>
+                </div>
+                <div class="step" onclick="openModal('solution-value')">
+                    <div class="step-number">3</div>
+                    <div class="step-title">
+                        VALORE AGGIUNTO
+                        <span class="expand-icon">▶</span>
+                    </div>
+                    <div class="step-content">
+                        <p>• 1M COACH incluso</p>
+                        <p>• Business oltre 1 milione/anno</p>
+                        <p>• "Chi meglio di chi ce l'ha fatta può insegnartelo?"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PREZZO -->
+        <div class="section">
+            <div class="section-title">
+                <div class="icon">💰</div>
+                PRESENTAZIONE PREZZO
+            </div>
+            <div class="price-highlight" onclick="openModal('pricing-detail')">
+                <div class="price">2.600€ + IVA</div>
+                <p>Investimento completo per tutto l'anno</p>
+                <p style="margin-top: 15px; opacity: 0.9;">+ 200€ + IVA per Mental Coach Sportivo (opzionale)</p>
+                <p style="margin-top: 10px; font-size: 0.9em;">Finanziamento Santander: 12 rate da 270€/mese</p>
+                <p style="margin-top: 15px; font-size: 0.9em; opacity: 0.8;">Clicca per dettagli completi ▶</p>
+            </div>
+        </div>
+        
+        <!-- GESTIONE OBIEZIONI -->
+        <div class="section">
+            <div class="section-title">
+                <div class="icon">🛡</div>
+                GESTIONE OBIEZIONI
+            </div>
+            <div class="objection-grid">
+                <div class="objection" onclick="openModal('objection-september')">
+                    <div class="objection-title">
+                        "Voglio iniziare a settembre"
+                        <span class="expand-icon">▶</span>
+                    </div>
+                </div>
+                <div class="objection" onclick="openModal('objection-think')">
+                    <div class="objection-title">
+                        "Ci devo pensare"
+                        <span class="expand-icon">▶</span>
+                    </div>
+                </div>
+                <div class="objection" onclick="openModal('objection-spouse')">
+                    <div class="objection-title">
+                        "Devo parlarne con mio marito/moglie"
+                        <span class="expand-icon">▶</span>
+                    </div>
+                </div>
+                <div class="objection" onclick="openModal('objection-expensive')">
+                    <div class="objection-title">
+                        "È troppo costoso"
+                        <span class="expand-icon">▶</span>
+                    </div>
+                </div>
+                <div class="objection" onclick="openModal('objection-experience')">
+                    <div class="objection-title">
+                        "Non ho esperienza"
+                        <span class="expand-icon">▶</span>
+                    </div>
+                </div>
+                <div class="objection" onclick="openModal('objection-saturday')">
+                    <div class="objection-title">
+                        "Non ci sono il sabato"
+                        <span class="expand-icon">▶</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- FRASI POWER -->
+        <div class="section">
+            <div class="section-title">
+                <div class="icon">🎯</div>
+                FRASI POWER PER CHIUDERE
+            </div>
+            <div class="power-phrases">
+                <div class="phrase" onclick="openModal('power-accelerate')">
+                    <strong>Per Accelerare:</strong> "Le persone di successo hanno una cosa in comune..."
+                </div>
+                <div class="phrase" onclick="openModal('power-urgency')">
+                    <strong>Per Creare Urgenza:</strong> "Io posso tenerti questo posto solo fino a domani..."
+                </div>
+                <div class="phrase" onclick="openModal('power-fear')">
+                    <strong>Per Superare la Paura:</strong> "Tutti i coach di successo che conosci hanno fatto questo salto..."
+                </div>
+                <div class="phrase" onclick="openModal('power-need')">
+                    <strong>Per Riportare al Bisogno:</strong> "Vuoi davvero rimanere nella situazione che ti ha portato a chiamarmi..."
+                </div>
+            </div>
+        </div>
+        
+        <!-- CHECKLIST -->
+        <div class="section">
+            <div class="section-title">
+                <div class="icon">📋</div>
+                CHECKLIST CHIAMATA
+            </div>
+            <div class="checklist">
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox">✓</div>
+                    <span>Riepilogo bisogno</span>
+                </div>
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox">✓</div>
+                    <span>Presentazione completa</span>
+                </div>
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox">✓</div>
+                    <span>Prezzo con giustificazione</span>
+                </div>
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox">✓</div>
+                    <span>Gestione obiezioni</span>
+                </div>
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox">✓</div>
+                    <span>Chiusura decisa</span>
+                </div>
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox">✓</div>
+                    <span>Aggiornamento CRM</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- MINDSET FINALE -->
+        <div class="section">
+            <div class="section-title">
+                <div class="icon">💪</div>
+                MINDSET DEL SALES VINCENTE
+            </div>
+            <div class="mindset-box">
+                <div class="mindset-quote">"Questa persona ha bisogno del mio aiuto. Il mio compito è capire se posso aiutarla e mostrarle come."</div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 25px;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; text-align: center;">
+                        <strong>🤝 STAI AIUTANDO</strong><br>
+                        Non vendendo
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; text-align: center;">
+                        <strong>🌟 CAMBI LE VITE</strong><br>
+                        Il tuo prodotto ha valore
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; text-align: center;">
+                        <strong>🎯 OGNI "NO"</strong><br>
+                        Ti avvicina al "sì"
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; text-align: center;">
+                        <strong>💼 SEI UN CONSULENTE</strong><br>
+                        Non un venditore
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHECKLIST RAPIDA -->
+        <div class="section">
+            <div class="section-title">
+                <div class="icon">⚡</div>
+                CHECKLIST RAPIDA PRE-CHIAMATA
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                <div class="checklist-item" onclick="toggleCheck(this)" style="background: linear-gradient(135deg, rgba(78,205,196,0.2), rgba(78,205,196,0.1)); border: 1px solid rgba(78,205,196,0.3); padding: 15px; border-radius: 12px;">
+                    <div class="checkbox">✓</div>
+                    <span style="font-weight: 500;">Ricerca veloce sul prospect</span>
+                </div>
+                <div class="checklist-item" onclick="toggleCheck(this)" style="background: linear-gradient(135deg, rgba(102,126,234,0.2), rgba(102,126,234,0.1)); border: 1px solid rgba(102,126,234,0.3); padding: 15px; border-radius: 12px;">
+                    <div class="checkbox">✓</div>
+                    <span style="font-weight: 500;">Preparazione mentale</span>
+                </div>
+                <div class="checklist-item" onclick="toggleCheck(this)" style="background: linear-gradient(135deg, rgba(255,107,107,0.2), rgba(255,107,107,0.1)); border: 1px solid rgba(255,107,107,0.3); padding: 15px; border-radius: 12px;">
+                    <div class="checkbox">✓</div>
+                    <span style="font-weight: 500;">Ambiente silenzioso</span>
+                </div>
+                <div class="checklist-item" onclick="toggleCheck(this)" style="background: linear-gradient(135deg, rgba(255,206,84,0.2), rgba(255,206,84,0.1)); border: 1px solid rgba(255,206,84,0.3); padding: 15px; border-radius: 12px;">
+                    <div class="checkbox">✓</div>
+                    <span style="font-weight: 500;">Apertura con energia</span>
+                </div>
+                <div class="checklist-item" onclick="toggleCheck(this)" style="background: linear-gradient(135deg, rgba(168,237,234,0.2), rgba(168,237,234,0.1)); border: 1px solid rgba(168,237,234,0.3); padding: 15px; border-radius: 12px;">
+                    <div class="checkbox">✓</div>
+                    <span style="font-weight: 500;">Framework 3 step</span>
+                </div>
+                <div class="checklist-item" onclick="toggleCheck(this)" style="background: linear-gradient(135deg, rgba(138,43,226,0.2), rgba(138,43,226,0.1)); border: 1px solid rgba(138,43,226,0.3); padding: 15px; border-radius: 12px;">
+                    <div class="checkbox">✓</div>
+                    <span style="font-weight: 500;">5+ domande discovery</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- CALL TO ACTION FINALE -->
+        <div style="text-align: center; padding: 50px 20px; background: linear-gradient(45deg, #667eea, #764ba2); border-radius: 25px; margin-top: 40px; position: relative; overflow: hidden;">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,255,255,0.05) 20px, rgba(255,255,255,0.05) 40px); pointer-events: none;"></div>
+            <h2 style="font-family: 'Orbitron', monospace; font-size: 2.5em; margin-bottom: 20px; position: relative; z-index: 1;">📞 ORA VAI E VENDI!</h2>
+            <p style="font-size: 1.3em; font-weight: 500; margin-bottom: 15px; position: relative; z-index: 1;">Il successo si costruisce con il lavoro!</p>
+            <p style="font-size: 1em; opacity: 0.9; position: relative; z-index: 1;">Usa questa guida per chiudere con sicurezza e professionalità</p>
+        </div>
+    </div>
+
+    <!-- MODAL -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script>
+        // Modal functions
+        function openModal(contentId) {
+            const modal = document.getElementById('modal');
+            const modalBody = document.getElementById('modal-body');
+            
+            modalBody.innerHTML = getModalContent(contentId);
+            modal.classList.add('show');
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.remove('show');
+        }
+        
+        function toggleCheck(element) {
+            element.classList.toggle('checked');
+        }
+        
+        // Modal content
+        function getModalContent(contentId) {
+            const contents = {
+                'lead-contact': `
+                    <h2>🎯 PRIMO CONTATTO</h2>
+                    <p><strong>Obiettivo:</strong> Fissare appuntamento per videocall di presentazione</p>
+                    
+                    <div class="template-box">
+                        <h5>📝 Template Messaggio Vocale</h5>
+                        <p><em>"Ciao [Nome], sono [Tuo Nome] di Protocollo 27.</em></p>
+                        <p><em>Ho visto la tua richiesta di informazioni sul nostro programma di Mental Coaching.</em></p>
+                        <p><em>Ti chiamo per fissare una videocall di 20 minuti dove ti spiego esattamente come funziona il percorso e come puoi diventare Mental Coach.</em></p>
+                        <p><em>Fammi sapere se preferisci mattina o pomeriggio, così ci organizziamo.</em></p>
+                        <p><em>A presto!"</em></p>
+                    </div>
+                `,
+                
+                'lead-followup': `
+                    <h2>🔄 FOLLOW-UP NATURALE</h2>
+                    <p><strong>Obiettivo:</strong> Ricontatto semplice e diretto</p>
+                    
+                    <div class="template-box">
+                        <h5>📝 Script Seconda Chiamata</h5>
+                        <p><em>"Ciao [Nome], ti avevo lasciato un messaggio per la videocall sul Mental Coaching.</em></p>
+                        <p><em>Volevo sapere se sei ancora interessato/a. Se sì, fammi sapere quando ti va bene sentirci.</em></p>
+                        <p><em>Altrimenti nessun problema. [Numero]"</em></p>
+                    </div>
+                `,
+                
+                'lead-reserve': `
+                    <h2>📋 LISTA RISERVA</h2>
+                    <p><strong>Obiettivo:</strong> Recuperare lead "dormiente" in modo naturale</p>
+                    
+                    <div class="template-box">
+                        <h5>📝 Script Chiamata Riserva</h5>
+                        <p><em>"Ciao [Nome], ti avevo contattato tempo fa per il Mental Coaching.</em></p>
+                        <p><em>Volevo risentire se ti può ancora interessare.</em></p>
+                        <p><em>Se vuoi ci sentiamo 10 minuti."</em></p>
+                    </div>
+                `,
+                
+                'rapport': `
+                    <h2>🤝 RAPPORT E AUTORITÀ</h2>
+                    <p><strong>Obiettivo:</strong> Creare connessione e stabilire credibilità immediatamente</p>
+                    
+                    <h4>🎭 Atteggiamento Base (Linguaggio del Corpo Vocale)</h4>
+                    <ul>
+                        <li><strong>Sorriso genuino:</strong> Si percepisce nella voce, trasmette positività</li>
+                        <li><strong>Energia contagiosa:</strong> Entusiasmo controllato, non eccessivo</li>
+                        <li><strong>Velocità moderata:</strong> Per trasmettere sicurezza e controllo</li>
+                    </ul>
+                `,
+                
+                'framework': `
+                    <h2>🎯 FRAMEWORK DI CONTROLLO</h2>
+                    <p><strong>Obiettivo:</strong> Guidare la conversazione e ottenere micro-commitment</p>
+                    
+                    <div class="template-box">
+                        <h5>📝 Script di Apertura Autentico</h5>
+                        <p><em>"Perfetto [Nome], se sei d'accordo ti spiego come vorrei strutturare questa chiamata.</em></p>
+                        <p><em>La mia idea è questa:</em></p>
+                        <p><em><strong>Step 1:</strong> Prima ti faccio alcune domande per capire meglio la tua situazione e cosa stai cercando</em></p>
+                        <p><em><strong>Step 2:</strong> Ti spiego com'è fatto il nostro percorso e come funziona</em></p>
+                        <p><em><strong>Step 3:</strong> Vediamo insieme se può essere quello che fa per te</em></p>
+                        <p><em>Ti va bene così? Iniziamo?"</em></p>
+                    </div>
+                `,
+                
+                'discovery-opening': `
+                    <h2>🗣️ DOMANDE DI APERTURA GENUINE</h2>
+                    <p><strong>Obiettivo:</strong> Rompere il ghiaccio e raccogliere informazioni di base</p>
+                    
+                    <div class="template-box">
+                        <h5>1️⃣ Situazione Attuale</h5>
+                        <p><em>"Dimmi un po' di te... Di cosa ti occupi attualmente? Com'è la tua giornata tipo?"</em></p>
+                    </div>
+                    
+                    <div class="template-box">
+                        <h5>2️⃣ Interesse nel Coaching</h5>
+                        <p><em>"Cosa ti ha portato a cercare informazioni sul Mental Coaching?"</em></p>
+                    </div>
+                    
+                    <div class="template-box">
+                        <h5>3️⃣ Esperienza Precedente</h5>
+                        <p><em>"Hai mai fatto coaching o sei alla prima esperienza?"</em></p>
+                    </div>
+                `,
+                
+                'discovery-motivation': `
+                    <h2>💭 DOMANDE PER CAPIRE LA MOTIVAZIONE</h2>
+                    
+                    <div class="template-box">
+                        <h5>🎯 Domande Chiave</h5>
+                        <p><em>"Cosa ti piacerebbe che fosse diverso nella tua vita lavorativa?"</em></p>
+                        <p><em>"Se potessi immaginare la tua situazione ideale tra un paio d'anni, come sarebbe?"</em></p>
+                        <p><em>"Cosa significa per te aiutare le altre persone?"</em></p>
+                        <p><em>"Hai già pensato a come vorresti lavorare come coach?"</em></p>
+                    </div>
+                `,
+                
+                'discovery-practical': `
+                    <h2>⚙️ DOMANDE PRATICHE</h2>
+                    
+                    <div class="template-box">
+                        <h5>💰 Investimento in Formazione</h5>
+                        <p><em>"Hai mai investito in formazione per te stesso? Com'è andata?"</em></p>
+                    </div>
+                    
+                    <div class="template-box">
+                        <h5>⏰ Disponibilità Temporale</h5>
+                        <p><em>"Se decidessi di fare questo percorso, che tipo di impegno puoi mettere?"</em></p>
+                    </div>
+                    
+                    <div class="template-box">
+                        <h5>🚀 Tempistiche</h5>
+                        <p><em>"Hai già un'idea di quando vorresti iniziare a lavorare come coach?"</em></p>
+                    </div>
+                `,
+                
+                'solution-transition': `
+                    <h2>🔄 TRANSIZIONE NATURALE</h2>
+                    
+                    <div class="template-box">
+                        <h5>📝 Script di Transizione</h5>
+                        <p><em>"Bene [Nome], da quello che mi hai raccontato, credo che possiamo davvero aiutarti.</em></p>
+                        <p><em>Ti spiego quello che facciamo e come funziona, poi mi dici cosa ne pensi."</em></p>
+                    </div>
+                `,
+                
+                'solution-story': `
+                    <h2>📖 STORY TELLING CON SOCIAL PROOF</h2>
+                    
+                    <div class="template-box">
+                        <h5>📝 Script Protocollo 27 Completo</h5>
+                        <p><em>"Ti spiego cos'è Protocollo 27 e soprattutto <strong>cosa ci distingue da tutti gli altri</strong>.</em></p>
+                        <p><em>Noi siamo un'organizzazione che ha come focus primario fare coaching. Abbiamo creato METODO SINCRO, un brand molto conosciuto in ambito sportivo.</em></p>
+                        <p><em>Con la crescita che abbiamo avuto, Antonio, il fondatore, si è trovato in difficoltà a trovare coach con un buon livello pratico. Quando facevamo selezioni, arrivavano coach usciti da programmi anche importanti, ma <strong>la maggior parte non passava le nostre prove pratiche</strong>.</em></p>
+                        <p><em>Sapevano tutto a livello teorico, ma quando dovevano applicare quello che avevano studiato... <strong>non ci riuscivano</strong>.</em></p>
+                        <p><em>A quel punto Antonio ha preso Nicolò Fabbri - il nostro coach con più esperienza pratica - e ha detto: 'Fondiamo un'Academy dove <strong>si impara facendo coaching vero, non solo studiando</strong>.'</em></p>
+                        <p><em>È nato così Protocollo 27. Da lì in poi, <strong>i migliori li abbiamo sempre presi nella nostra società</strong>.</em></p>
+                        <p><em><strong>Da qui esci e sei un coach pronto da subito</strong>."</em></p>
+                    </div>
+                `,
+                
+                'solution-value': `
+                    <h2>💎 IL VALORE AGGIUNTO CONCRETO</h2>
+                    
+                    <div class="template-box">
+                        <h5>📝 Script Valore Aggiunto</h5>
+                        <p><em>"C'è un'altra cosa importante. Antonio, oltre a essere il fondatore di Metodo Sincro, in questi anni ha costruito un business di coaching che <strong>fattura oltre un milione l'anno</strong>.</em></p>
+                        <p><em>Ha creato un programma chiamato <strong>1M COACH</strong> dove condivide come ha fatto a costruire tutto questo - dalla prima sessione fino ad arrivare dove è oggi.</em></p>
+                        <p><em>Normalmente questo programma lo vende separatamente, ma abbiamo deciso che <strong>chi entra in Protocollo 27 lo avrà incluso</strong>.</em></p>
+                        <p><em>Perché? Semplice: <strong>non basta saper fare coaching, bisogna anche saper costruire la propria attività</strong>. E chi meglio di chi ce l'ha fatta può insegnartelo?"</em></p>
+                    </div>
+                `,
+                
+                'pricing-detail': `
+                    <h2>💰 PRESENTAZIONE PREZZO COMPLETA</h2>
+                    
+                    <div class="template-box">
+                        <h5>🎯 Setup Psicologico Pre-Prezzo</h5>
+                        <p><em>"Ora [Nome], prima di parlarti dell'investimento, lascia che ti dica una cosa.</em></p>
+                        <p><em>Con Metodo Sincro, quando lavoriamo con un cliente privato, una programma di 8 sessioni di coaching costa <strong>2750 €</strong>. Per farti capire il potenziale di recupero dell'investimento.</em></p>
+                        <p><em>Con il tuo primo cliente avrai recuperato il <strong>95% dell'investimento</strong>… e con 2 sarai già in profitto…</em></p>
+                        <p><em>Ma il punto non è solo quello..."</em></p>
+                    </div>
+                    
+                    <div style="background: rgba(102,126,234,0.3); padding: 20px; border-radius: 10px; margin: 20px 0;">
+                        <h3 style="text-align: center; margin-bottom: 15px;">💎 INVESTIMENTO PROTOCOLLO 27</h3>
+                        <div style="text-align: center; font-size: 2em; font-weight: bold; margin: 15px 0;">2.600€ + IVA</div>
+                        <p style="text-align: center;"><strong>Investimento completo per tutto l'anno</strong></p>
+                    </div>
+                    
+                    <h4>💎 Valore Incluso:</h4>
+                    <ul>
+                        <li>16 moduli pratici di 4 ore ciascuno</li>
+                        <li>Possibilità di ripetere ogni modulo quando vuoi durante l'anno</li>
+                        <li>Il programma 1M COACH incluso (valore 2.500€)</li>
+                        <li>Community di supporto</li>
+                        <li>Materiale di studio online (START + WARM UP)</li>
+                        <li>Supporto diretto dei nostri coach</li>
+                    </ul>
+                `,
+                
+                'objection-september': `
+                    <h2>📅 "VOGLIO INIZIARE A SETTEMBRE"</h2>
+                    
+                    <div class="template-box">
+                        <h5>📝 Risposta Completa</h5>
+                        <p><em>"Capisco [Nome], però lascia che ti dica una cosa. Se hai deciso di cambiare la tua vita, <strong>perché aspettare ancora 4 mesi?</strong> Ogni giorno che passa è un giorno in meno per costruire il tuo futuro.</em></p>
+                        <p><em>Inoltre, chi inizia adesso ha accesso a <strong>1M COACH che è disponibile solo questo mese</strong>. Tra un mese dovrai pagarlo a parte 2.500€.</em></p>
+                        <p><em>La domanda è: <strong>tra 6 mesi vuoi essere già un coach formato che sta aiutando le persone, o vuoi essere ancora qui a pensarci?</strong>"</em></p>
+                    </div>
+                `,
+                
+                'objection-think': `
+                    <h2>🤔 "CI DEVO PENSARE"</h2>
+                    
+                    <div class="template-box">
+                        <h5>📝 Risposta Strategica</h5>
+                        <p><em>"Certo [Nome], è normale. Ma lascia che ti faccia una domanda: <strong>cosa devi pensare esattamente?</strong></em></p>
+                        <p><em>Il fatto che non ti piaccia la tua situazione attuale? Il fatto che vuoi aiutare le persone? O il fatto che vuoi crescere professionalmente?</em></p>
+                        <p><em><strong>Queste cose le sai già.</strong> L'unica cosa che devi decidere è se vuoi continuare a rimanere dove sei o se vuoi fare il salto.</em></p>
+                        <p><em>Dimmi, <strong>cosa ti preoccupa di più?</strong>"</em></p>
+                    </div>
+                `,
+                
+                'objection-spouse': `
+                    <h2>👫 "DEVO PARLARNE CON MIO MARITO/MOGLIE"</h2>
+                    
+                    <div class="template-box">
+                        <h5>📝 Risposta Empatica e Strategica</h5>
+                        <p><em>"Assolutamente [Nome], è giusto condividere le decisioni importanti. Ma lascia che ti dia un consiglio: <strong>quando ne parli, non presentarlo come una spesa, ma come un investimento</strong>.</em></p>
+                        <p><em>Spiega che <strong>con un solo cliente copri l'investimento</strong> e che questo ti darà la libertà e la soddisfazione che stai cercando.</em></p>
+                        <p><em>Vuoi che ti prepari un documento che puoi mostrargli con tutti i numeri e i benefici?"</em></p>
+                    </div>
+                `,
+                
+                'objection-expensive': `
+                    <h2>💸 "È TROPPO COSTOSO"</h2>
+                    
+                    <div class="template-box">
+                        <h5>📝 Risposta Che Cambia Prospettiva</h5>
+                        <p><em>"Capisco [Nome], sembra una cifra importante. Ma facciamo due conti insieme:</em></p>
+                        <p><em><strong>2.600€ diviso 12 mesi = 216€ al mese. Sono circa 7€ al giorno.</strong></em></p>
+                        <p><em>Stiamo parlando del tuo futuro, della tua libertà, della possibilità di aiutare centinaia di persone.</em></p>
+                        <p><em><strong>Con un solo cliente recuperi tutto l'investimento.</strong> Non è un costo, è l'investimento più importante che puoi fare: quello su te stesso."</em></p>
+                    </div>
+                `,
+                
+                'objection-experience': `
+                    <h2>🤷‍♂️ "NON HO ESPERIENZA"</h2>
+                    
+                    <div class="template-box">
+                        <h5>📝 Risposta Motivazionale</h5>
+                        <p><em>"Ed è proprio per questo che esiste Protocollo 27! <strong>Nessuno nasce coach, si diventa.</strong></em></p>
+                        <p><em>Il programma è pensato per chi parte da zero. Avrai 16 moduli pratici, una community di supporto, e l'accesso diretto ad Antonio che ti insegnerà tutto.</em></p>
+                        <p><em><strong>La domanda non è se hai esperienza, ma se hai la volontà di acquisirla.</strong> E da come ti sento parlare, quella ce l'hai."</em></p>
+                    </div>
+                `,
+                
+                'objection-saturday': `
+                    <h2>📅 "NON CI SONO IL SABATO"</h2>
+                    
+                    <div class="template-box">
+                        <h5>📝 Risposta Flessibile</h5>
+                        <p><em>"Perfetto [Nome], proprio per questo i moduli possono essere ripetuti infinite volte nell'anno. Se salti un sabato, puoi recuperare il modulo nel sabato successivo quando c'è lo stesso argomento.</em></p>
+                        <p><em>Inoltre hai tutto il materiale START online per non perdere il ritmo.</em></p>
+                        <p><em>La cosa importante è che tu cominci, poi troveremo insieme il modo per farti seguire tutto."</em></p>
+                    </div>
+                `,
+                
+                'power-accelerate': `
+                    <h2>⚡ FRASE POWER: PER ACCELERARE LA DECISIONE</h2>
+                    
+                    <div class="template-box">
+                        <h5>📝 Frase Completa</h5>
+                        <p><em>"[Nome], le persone di successo hanno una cosa in comune: <strong>quando vedono un'opportunità, la colgono. Non aspettano il momento perfetto, perché non arriva mai.</strong>"</em></p>
+                    </div>
+                    
+                    <h4>🎯 Quando Usarla:</h4>
+                    <ul>
+                        <li>Quando il prospect è indeciso ma interessato</li>
+                        <li>Dopo aver superato le obiezioni principali</li>
+                        <li>Quando dicono "devo pensarci" senza motivi specifici</li>
+                        <li>Per spingere verso la chiusura finale</li>
+                    </ul>
+                `,
+                
+                'power-urgency': `
+                    <h2>⏰ FRASE POWER: PER CREARE URGENZA</h2>
+                    
+                    <div class="template-box">
+                        <h5>📝 Frase Completa</h5>
+                        <p><em>"Ascolta, io posso tenerti questo posto solo fino a domani. Dopo devo darlo a qualcun altro che è in lista d'attesa."</em></p>
+                    </div>
+                    
+                    <h4>⚠️ IMPORTANTE - Uso Etico:</h4>
+                    <div style="background: rgba(255,107,107,0.2); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <strong>🚨 Usa solo quando è VERO:</strong>
+                        <ul>
+                            <li>Hai realmente posti limitati nel prossimo corso</li>
+                            <li>C'è davvero una lista d'attesa</li>
+                            <li>Le condizioni cambiano effettivamente</li>
+                            <li>Non è un trucco ma una realtà logistica</li>
+                        </ul>
+                    </div>
+                `,
+                
+                'power-fear': `
+                    <h2>🦁 FRASE POWER: PER SUPERARE LA PAURA</h2>
+                    
+                    <div class="template-box">
+                        <h5>📝 Frase Completa</h5>
+                        <p><em>"So che può sembrare un salto nel vuoto, ma ricorda: <strong>tutti i coach di successo che conosci hanno fatto questo salto. La differenza tra loro e gli altri è che loro l'hanno fatto.</strong>"</em></p>
+                    </div>
+                    
+                    <h4>🎯 Quando Usarla:</h4>
+                    <ul>
+                        <li>Quando percepisci paura o ansia nella voce</li>
+                        <li>Quando dicono "e se non funziona?"</li>
+                        <li>Quando sono paralizzati dall'analisi eccessiva</li>
+                        <li>Per normalizzare la paura del cambiamento</li>
+                    </ul>
+                `,
+                
+                'power-need': `
+                    <h2>🎯 FRASE POWER: PER RIPORTARE AL BISOGNO</h2>
+                    
+                    <div class="template-box">
+                        <h5>📝 Frase Completa</h5>
+                        <p><em>"Tornando a quello che mi hai detto prima: vuoi davvero rimanere nella situazione che ti ha portato a chiamarmi, o vuoi finalmente fare qualcosa per cambiarla?"</em></p>
+                    </div>
+                    
+                    <h4>🎯 Quando Usarla:</h4>
+                    <ul>
+                        <li>Quando si perdono nelle obiezioni tecniche</li>
+                        <li>Quando dimenticano perché hanno chiamato</li>
+                        <li>Quando entrano in "modalità razionale" eccessiva</li>
+                        <li>Come ultima carta prima di chiudere</li>
+                    </ul>
+                `
+            };
+            
+            return contents[contentId] || '<p>Contenuto non trovato</p>';
+        }
+        
+        // Event listeners
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal') && !e.target.classList.contains('modal-content')) {
+                closeModal();
+            }
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
