@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Il Futuro di Tuo Figlio Inizia Qui - Metodo Sincro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #000;
+            color: white;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem 1rem;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+        }
+
+        .section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* BACKGROUNDS */
+        .bg-portal { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
+        .bg-truth { background: linear-gradient(135deg, #2c1810 0%, #1a1a2e 50%, #0a0a0a 100%); }
+        .bg-problems { background: linear-gradient(135deg, #0f3460 0%, #2c1810 50%, #1a1a2e 100%); }
+        .bg-frustration { background: linear-gradient(135deg, #1a1a2e 0%, #2c1810 100%); }
+        .bg-pain { background: linear-gradient(135deg, #2c1810 0%, #1a1a2e 100%); }
+        .bg-consequences { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #2c1810 100%); }
+        .bg-stats { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #667eea 100%); }
+        .bg-urgency { background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #FFD700 100%); }
+        .bg-solution { background: linear-gradient(135deg, #1a1a2e 0%, #0a0a0a 50%, #2c1810 100%); }
+        .bg-method { background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 50%, #2c1810 100%); }
+        .bg-proof { background: linear-gradient(135deg, #2c1810 0%, #1a1a2e 50%, #0a0a0a 100%); }
+        .bg-final { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #2c1810 100%); }
+
+        /* TYPOGRAPHY */
+        .main-title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: bold;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #FFD700, #FFA500, #FF6B6B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: bold;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 900px;
+            opacity: 0.9;
+        }
+
+        /* PORTAL DOOR */
+        .portal-door {
+            width: 280px;
+            height: 380px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            border-radius: 25px;
+            margin: 3rem auto;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.4);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .portal-door:hover {
+            transform: scale(1.05) translateY(-15px);
+            box-shadow: 0 0 80px rgba(255, 215, 0, 0.7);
+        }
+
+        .door-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .door-emoji {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .door-text {
+            font-size: 1.2rem;
+            color: black;
+            font-weight: bold;
+        }
+
+        /* CARDS */
+        .truth-card {
+            background: rgba(255, 107, 107, 0.1);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 107, 107, 0.3);
+            border-radius: 25px;
+            padding: 3rem;
+            max-width: 900px;
+            margin: 2rem auto;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: clamp(4rem, 12vw, 8rem);
+            font-weight: bold;
+            color: #FF6B6B;
+            margin: 2rem 0;
+            text-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* PROBLEM CARDS */
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+            max-width: 1400px;
+            width: 100%;
+        }
+
+        .problem-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .problem-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(45deg, #FF6B6B, #FFD700);
+            transition: width 0.5s ease;
+        }
+
+        .problem-card:hover::before {
+            width: 100%;
+            opacity: 0.1;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: #FFD700;
+            background: rgba(255, 215, 0, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .problem-card.selected {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.2), rgba(76, 201, 196, 0.2));
+            border-color: #FFD700;
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        .problem-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .problem-title {
+            color: #FFD700;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .problem-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* BUTTONS */
+        .btn {
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            color: white;
+            border: none;
+            padding: 1.5rem 3rem;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            margin: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-cta {
+            background: linear-gradient(45deg, #4ECDC4, #FFD700);
+            color: black;
+            font-size: 1.5rem;
+            padding: 2rem 4rem;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* RESULT BOX */
+        .result-box {
+            background: rgba(255, 107, 107, 0.15);
+            border: 2px solid #FF6B6B;
+            border-radius: 25px;
+            padding: 3rem;
+            margin: 3rem auto;
+            max-width: 800px;
+            text-align: center;
+            animation: pulse-red 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-red {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 107, 107, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(255, 107, 107, 0.6); }
+        }
+
+        /* METHOD GRID */
+        .method-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .method-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .method-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .method-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        /* FINAL CONTAINER */
+        .final-container {
+            background: rgba(76, 201, 196, 0.1);
+            backdrop-filter: blur(25px);
+            border: 3px solid rgba(76, 201, 196, 0.3);
+            border-radius: 30px;
+            padding: 3rem;
+            max-width: 800px;
+            margin: 2rem auto;
+            text-align: center;
+        }
+
+        /* PROGRESS INDICATOR */
+        .progress {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1rem;
+            z-index: 1000;
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .section {
+                padding: 2rem 1rem;
+            }
+            
+            .problems-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .portal-door {
+                width: 220px;
+                height: 300px;
+            }
+            
+            .btn {
+                padding: 1.2rem 2rem;
+                font-size: 1.1rem;
+            }
+            
+            .btn-cta {
+                padding: 1.5rem 2.5rem;
+                font-size: 1.2rem;
+                width: 90%;
+            }
+        }
+
+        /* COLORS */
+        .text-gold { color: #FFD700; }
+        .text-red { color: #FF6B6B; }
+        .text-cyan { color: #4ECDC4; }
+        .text-white { color: white; }
+        .text-black { color: black; }
+
+        /* CONSEQUENCES LIST */
+        .consequences-list {
+            max-width: 800px;
+            margin: 2rem auto;
+            text-align: left;
+        }
+
+        .consequence-item {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 4px solid #FF6B6B;
+            margin: 1rem 0;
+            padding: 1.5rem;
+            border-radius: 10px;
+            opacity: 0;
+            animation: slideInLeft 0.6s ease forwards;
+        }
+
+        .consequence-item:nth-child(1) { animation-delay: 0.1s; }
+        .consequence-item:nth-child(2) { animation-delay: 0.3s; }
+        .consequence-item:nth-child(3) { animation-delay: 0.5s; }
+        .consequence-item:nth-child(4) { animation-delay: 0.7s; }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress">
+        Step <span id="stepIndicator">1</span> di 12
+    </div>
+
+    <!-- STEP 1: PORTAL -->
+    <section class="section bg-portal active" id="section1">
+        <h1 class="main-title">Il Futuro di Tuo Figlio Inizia Qui</h1>
+        
+        <div class="subtitle">
+            Quello che scoprirai nei prossimi minuti potrebbe essere la chiave per sbloccare il vero potenziale di tuo figlio nel <strong class="text-gold">calcio</strong>, nello <strong class="text-cyan">studio</strong> e nella <strong class="text-red">vita</strong>.
+            <br><br>
+            <strong class="text-gold">⚠️ Ma prima di iniziare...</strong> devi sapere che questo non è per tutti.
+        </div>
+
+        <div class="portal-door" onclick="showStep(2)">
+            <div class="door-content">
+                <div class="door-emoji">🚪</div>
+                <div class="door-text">ENTRA NEL PERCORSO</div>
+            </div>
+        </div>
+
+        <p style="margin-top: 2rem; opacity: 0.8; font-size: 1.1rem; text-align: center; max-width: 600px;">
+            <strong class="text-red">Attenzione:</strong> questo percorso richiede solo 10 minuti, ma potrebbe cambiare tutto per sempre.
+        </p>
+    </section>
+
+    <!-- STEP 2: TRUTH -->
+    <section class="section bg-truth hidden" id="section2">
+        <h2 class="section-title text-red">
+            La Verità Scioccante che Nessun Allenatore Ti Dirà Mai
+        </h2>
+        
+        <div class="truth-card">
+            <div class="stat-number">90%</div>
+            <h3 class="text-gold" style="font-size: clamp(1.5rem, 4vw, 2.2rem); margin-bottom: 2rem;">
+                dei ragazzi che giocano a calcio abbandonano entro i 18 anni
+            </h3>
+            <p style="font-size: clamp(1.2rem, 3vw, 1.6rem); margin-bottom: 2rem;">
+                Non per mancanza di talento.<br>
+                Non per mancanza di passione.<br>
+                Non per mancanza di allenamento.
+            </p>
+            <p class="text-cyan" style="font-size: clamp(1.3rem, 3vw, 1.8rem); font-weight: bold;">
+                Ma per qualcosa che NESSUNO insegna mai...
+            </p>
+        </div>
+
+        <button class="btn" onclick="showStep(3)">
+            Dimmi Cosa... Devo Saperlo 😟
+        </button>
+    </section>
+
+    <!-- STEP 3: PROBLEM IDENTIFICATION -->
+    <section class="section bg-problems hidden" id="section3">
+        <h2 class="section-title">
+            💣 Riconosci Tuo Figlio in Uno di Questi Problemi Frustranti?
+        </h2>
+
+        <div class="problems-grid">
+            <div class="problem-card" onclick="selectProblem(this, 1)">
+                <span class="problem-emoji">⚡</span>
+                <h3 class="problem-title">Figlio con talento ma incostante</h3>
+                <p class="problem-description">
+                    Lo vedono forte... ma <strong>non lo dimostra sempre</strong>. Alterna grandi prestazioni a partite anonime. Vivete nell'ansia del "potrebbe fare molto di più".
+                </p>
+            </div>
+
+            <div class="problem-card" onclick="selectProblem(this, 2)">
+                <span class="problem-emoji">😰</span>
+                <h3 class="problem-title">Figlio che si butta giù facilmente</h3>
+                <p class="problem-description">
+                    Dopo una partita sbagliata, crolla. Perde fiducia. Si autosabota. <strong>Non regge la pressione</strong> o le critiche dell'allenatore.
+                </p>
+            </div>
+
+            <div class="problem-card" onclick="selectProblem(this, 3)">
+                <span class="problem-emoji">⚔️</span>
+                <h3 class="problem-title">Conflitti con l'allenatore o la società</h3>
+                <p class="problem-description">
+                    Vedete <strong>ingiustizie</strong>, panchine non meritate, poca valorizzazione. Ma non sapete <strong>come agire</strong> senza rovinare tutto.
+                </p>
+            </div>
+
+            <div class="problem-card" onclick="selectProblem(this, 4)">
+                <span class="problem-emoji">🤔</span>
+                <h3 class="problem-title">Non sapere se cambiare squadra</h3>
+                <p class="problem-description">
+                    Restare o cambiare? Salire di livello o stare dove si trova bene? La paura è fare <strong>la scelta sbagliata</strong> nel momento sbagliato.
+                </p>
+            </div>
+
+            <div class="problem-card" onclick="selectProblem(this, 5)">
+                <span class="problem-emoji">😤</span>
+                <h3 class="problem-title">Figlio indomabile e disinteressato</h3>
+                <p class="problem-description">
+                    Avete a che fare con un figlio <strong>poco disciplinato</strong>, svogliato, che non ascolta o che prende il calcio sottogamba.
+                </p>
+            </div>
+
+            <div class="problem-card" onclick="selectProblem(this, 6)">
+                <span class="problem-emoji">😡</span>
+                <h3 class="problem-title">Stress e ansia in casa prima/dopo le partite</h3>
+                <p class="problem-description">
+                    L'ambiente è teso, si litiga, il calcio diventa fonte di <strong>stress più che passione</strong>. La famiglia ne risente.
+                </p>
+            </div>
+
+            <div class="problem-card" onclick="selectProblem(this, 7)">
+                <span class="problem-emoji">😔</span>
+                <h3 class="problem-title">Sentirsi soli e impreparati</h3>
+                <p class="problem-description">
+                    Spesso i genitori non hanno <strong>nessuno</strong> che li aiuti davvero a capire <strong>cosa dire, cosa fare e cosa evitare</strong>.
+                </p>
+            </div>
+        </div>
+
+        <div id="problemResult" class="hidden">
+            <div class="result-box">
+                <h3 class="text-gold" style="font-size: 1.8rem; margin-bottom: 2rem;">
+                    Ecco, l'hai riconosciuto! 💔
+                </h3>
+                <p style="margin-bottom: 2rem; font-size: 1.3rem;">
+                    Quello che provi ora... quella frustrazione mista a impotenza... è esattamente quello che provano <strong>migliaia di genitori</strong> ogni giorno.
+                </p>
+                <p class="text-cyan" style="margin-bottom: 2rem; font-size: 1.2rem; font-style: italic;">
+                    La verità è che NON è colpa tua. E soprattutto NON è colpa di tuo figlio.
+                </p>
+                <button class="btn" onclick="showStep(4)">
+                    Allora Di Chi È La Colpa? 😰
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- STEP 4: FRUSTRATION AMPLIFICATION -->
+    <section class="section bg-frustration hidden" id="section4">
+        <h2 class="section-title text-red">
+            Il Vero Problema Che Nessuno Ti Ha Mai Spiegato
+        </h2>
+
+        <div class="result-box">
+            <p class="text-gold" style="font-size: clamp(1.4rem, 4vw, 2rem); margin-bottom: 2rem; font-weight: bold;">
+                Il problema non è tuo figlio. Il problema è il SISTEMA.
+            </p>
+            <p style="font-size: clamp(1.2rem, 3vw, 1.6rem); margin-bottom: 2rem;">
+                ⚽ <strong>Le società</strong> si concentrano solo sulla tecnica<br>
+                🏃 <strong>Gli allenatori</strong> guardano solo il fisico<br>
+                📊 <strong>I genitori</strong> si focalizzano solo sui risultati
+            </p>
+            <p class="text-cyan" style="font-size: clamp(1.4rem, 3vw, 1.8rem); font-weight: bold; margin-bottom: 2rem;">
+                Ma NESSUNO sviluppa la cosa più importante...
+            </p>
+            <p class="text-red" style="font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: bold;">
+                LA MENTALITÀ VINCENTE
+            </p>
+        </div>
+
+        <button class="btn" onclick="showStep(5)">
+            È Esattamente Così! Continua... 🤯
+        </button>
+    </section>
+
+    <!-- STEP 5: PAIN AMPLIFICATION -->
+    <section class="section bg-pain hidden" id="section5">
+        <h2 class="section-title text-red">
+            I Pensieri che Ti Tormentano Ogni Notte
+        </h2>
+
+        <div class="result-box">
+            <p class="text-gold" style="font-size: clamp(1.4rem, 4vw, 2rem); margin-bottom: 2rem; font-style: italic;">
+                "E se non sto facendo abbastanza per aiutarlo?"
+            </p>
+            <p style="font-size: clamp(1.2rem, 3vw, 1.6rem); margin-bottom: 2rem;">
+                🔍 Vedi altri ragazzi che sembrano progredire più velocemente...<br><br>
+                👨‍👩‍👧‍👦 Vedi genitori che sembrano avere tutte le risposte...<br><br>
+                🎯 Vedi allenatori che promettono miracoli ma...<br><br>
+                ⏰ Senti che il tempo sta per scadere...
+            </p>
+            <p class="text-cyan" style="font-size: clamp(1.4rem, 3vw, 1.8rem); font-weight: bold;">
+                E la notte ti chiedi: "Sto rovinando il futuro di mio figlio?"
+            </p>
+        </div>
+
+        <button class="btn" onclick="showStep(6)">
+            Stop! Basta Così... Aiutami! 😭
+        </button>
+    </section>
+
+    <!-- STEP 6: CONSEQUENCES -->
+    <section class="section bg-consequences hidden" id="section6">
+        <h2 class="section-title text-red">
+            Ecco Cosa Succede Se Non Agisci ADESSO
+        </h2>
+
+        <div class="consequences-list">
+            <div class="consequence-item">
+                <strong class="text-red">📉 Performance Altalenanti:</strong> Tuo figlio continuerà ad alternare prestazioni brillanti a partite deludenti, perdendo opportunità cruciali.
+            </div>
+            <div class="consequence-item">
+                <strong class="text-red">🚪 Abbandono Precoce:</strong> Entro i 16 anni potrebbe perdere completamente la passione e abbandonare il calcio per sempre.
+            </div>
+            <div class="consequence-item">
+                <strong class="text-red">💔 Autostima Distrutta:</strong> I fallimenti ripetuti mineranno la sua fiducia non solo nel calcio, ma in tutto quello che farà nella vita.
+            </div>
+            <div class="consequence-item">
+                <strong class="text-red">😞 Rimpianti Eterni:</strong> Tra 10 anni sia tu che lui vi chiederete: "E se avessimo provato?"
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+            <p class="text-gold" style="font-size: clamp(1.3rem, 3vw, 1.7rem); font-weight: bold; margin-bottom: 2rem;">
+                Ma c'è ancora speranza...
+            </p>
+            <button class="btn" onclick="showStep(7)">
+                Dimmi Che C'è Una Soluzione! 🙏
+            </button>
+        </div>
+    </section>
+
+    <!-- STEP 7: STATS REVELATION -->
+    <section class="section bg-stats hidden" id="section7">
+        <h2 class="section-title">
+            La Statistica che Cambierà Tutto
+        </h2>
+
+        <div class="stat-number" style="color: #4ECDC4;">85%</div>
+        
+        <div style="text-align: center; max-width: 900px;">
+            <h3 class="text-gold" style="font-size: clamp(1.5rem, 4vw, 2.2rem); margin-bottom: 2rem;">
+                dei giovani calciatori di SUCCESSO hanno sviluppato la mentalità vincente entro i 14 anni
+            </h3>
+            <p style="font-size: clamp(1.2rem, 3vw, 1.6rem); margin-bottom: 2rem;">
+                Non la tecnica perfetta.<br>
+                Non la forma fisica superiore.<br>
+                Non il talento naturale.
+            </p>
+            <p class="text-cyan" style="font-size: clamp(1.4rem, 3vw, 1.8rem); font-weight: bold; margin-bottom: 2rem;">
+                LA MENTALITÀ VINCENTE.
+            </p>
+            <p class="text-red" style="font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: bold;">
+                E se tuo figlio non la sviluppa ADESSO... potrebbe essere troppo tardi.
+            </p>
+        </div>
+
+        <button class="btn" onclick="showStep(8)">
+            Come Posso Svilupparla? Dimmi Come! 🔥
+        </button>
+    </section>
+
+    <!-- STEP 8: URGENCY -->
+    <section class="section bg-urgency hidden" id="section8">
+        <h2 class="section-title text-black">
+            La Finestra di Opportunità Si Sta Chiudendo
+        </h2>
+
+        <div style="background: rgba(0, 0, 0, 0.7); border: 3px solid #FFD700; border-radius: 25px; padding: 3rem; margin: 2rem auto; max-width: 800px; text-align: center;">
+            <h3 class="text-gold" style="font-size: clamp(1.5rem, 4vw, 2.2rem); margin-bottom: 2rem;">
+                Il Momento Perfetto È ADESSO
+            </h3>
+            <div class="text-gold" style="font-size: clamp(3rem, 8vw, 5rem); font-weight: bold; margin: 2rem 0;">
+                ESTATE 2025
+            </div>
+            <p style="font-size: clamp(1.2rem, 3vw, 1.6rem); margin-bottom: 2rem;">
+                🧠 <strong>Neuroplasticità al picco:</strong> Il cervello di tuo figlio è ancora malleabile<br>
+                ⏰ <strong>3 mesi cruciali:</strong> L'estate per trasformare completamente il suo approccio<br>
+                🎯 <strong>Età critica:</strong> Dopo i 15 anni diventa 10 volte più difficile
+            </p>
+            <p class="text-red" style="font-size: clamp(1.3rem, 3vw, 1.7rem); font-weight: bold;">
+                Dopo settembre... potrebbe essere troppo tardi per sempre.
+            </p>
+        </div>
+
+        <button class="btn" onclick="showStep(9)">
+            Non Voglio Che Sia Troppo Tardi! 😱
+        </button>
+    </section>
+
+    <!-- STEP 9: SOLUTION REVEAL -->
+    <section class="section bg-solution hidden" id="section9">
+        <h2 class="section-title text-cyan">
+            Ecco Come Salviamo Tuo Figlio
+        </h2>
+
+        <div style="text-align: center; max-width: 900px;">
+            <p style="font-size: clamp(1.3rem, 3vw, 1.7rem); margin-bottom: 2rem;">
+                Dopo 15 anni di ricerca e oltre <strong class="text-gold">2.000 giovani atleti</strong> trasformati, abbiamo scoperto il segreto che nessuno conosce...
+            </p>
+            
+            <div class="result-box">
+                <h3 class="text-gold" style="font-size: clamp(1.8rem, 5vw, 2.8rem); margin-bottom: 2rem;">
+                    Il METODO SINCRO
+                </h3>
+                
+                <p style="font-size: clamp(1.2rem, 3vw, 1.6rem); margin-bottom: 2rem;">
+                    Non è un corso di calcio normale.<br>
+                    Non è solo tecnica.<br>
+                    Non è solo tattica.
+                </p>
+                
+                <p class="text-cyan" style="font-size: clamp(1.4rem, 3vw, 1.8rem); font-weight: bold; margin-bottom: 2rem;">
+                    È l'UNICO sistema che parte dalla MENTE per trasformare tutto il resto.
+                </p>
+                
+                <div style="background: rgba(255, 107, 107, 0.1); padding: 2rem; border-radius: 15px; margin: 2rem 0;">
+                    <p class="text-red" style="font-size: clamp(1.3rem, 3vw, 1.7rem); font-weight: bold; margin-bottom: 1rem;">
+                        🧠 IL SEGRETO RIVOLUZIONARIO:
+                    </p>
+                    <p style="font-size: clamp(1.1rem, 2.5vw, 1.4rem);">
+                        Lavoriamo sempre per <strong class="text-gold">ottimizzare l'aspetto mentale</strong><br>
+                        perché la mente controlla <strong class="text-cyan">corpo</strong> ed <strong class="text-red">emozioni</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn" onclick="showStep(10)">
+            Come Funziona Esattamente? 🤔
+        </button>
+    </section>
+
+    <!-- STEP 10: METHOD EXPLANATION -->
+    <section class="section bg-method hidden" id="section10">
+        <h2 class="section-title">
+            I 3 Pilastri del Metodo Sincro
+        </h2>
+
+        <div style="text-align: center; margin-bottom: 3rem;">
+            <p class="text-gold" style="font-size: clamp(1.4rem, 3.5vw, 1.9rem); font-weight: bold; margin-bottom: 2rem;">
+                🎯 IL SEGRETO: Tutto Parte dalla MENTE
+            </p>
+            <p style="font-size: clamp(1.2rem, 3vw, 1.6rem); margin-bottom: 2rem;">
+                Nel Metodo Sincro lavoriamo sempre per <strong class="text-cyan">ottimizzare l'aspetto mentale</strong><br>
+                perché sappiamo che la mente influenza <strong class="text-red">corpo</strong> ed <strong class="text-gold">emozioni</strong>
+            </p>
+        </div>
+
+        <div class="method-grid">
+            <div class="method-card" style="border-color: rgba(255, 107, 107, 0.5); background: rgba(255, 107, 107, 0.1); transform: scale(1.05);">
+                <div class="method-emoji">🧠</div>
+                <h4 class="method-title text-red">MENTE VINCENTE</h4>
+                <p style="font-size: 0.9rem; line-height: 1.5;">
+                <strong>• Fiducia incrollabile</strong> in ogni situazione<br>
+                <strong>• Resilienza mentale</strong> contro le critiche<br>
+                <strong>• Concentrazione laser</strong> nei momenti decisivi<br>
+                <strong>• Gestione della pressione</strong> e dell'ansia<br>
+                <strong>• Autostima indistruttibile</strong><br>
+                <strong>• Mentalità da campione</strong></p>
+                <div class="text-red" style="font-size: 0.8rem; margin-top: 1rem; font-weight: bold;">
+                    🎯 PRIORITÀ #1 - Il Fondamento di Tutto
+                </div>
+            </div>
+            <div class="method-card" style="border-color: rgba(76, 201, 196, 0.3);">
+                <div class="method-emoji">⚽</div>
+                <h4 class="method-title text-cyan">CORPO ECCELLENTE</h4>
+                <p style="font-size: 0.9rem; line-height: 1.5;">
+                <strong>• Tecnica personalizzata</strong> per il suo ruolo<br>
+                <strong>• Coordinazione avanzata</strong> e agilità<br>
+                <strong>• Forza funzionale</strong> e resistenza<br>
+                <strong>• Prevenzione infortuni</strong> scientifica<br>
+                <strong>• Performance atletiche</strong> superiori</p>
+                <div class="text-cyan" style="font-size: 0.8rem; margin-top: 1rem; font-style: italic;">
+                    Usare la mente per allenare il corpo
+                </div>
+            </div>
+            <div class="method-card" style="border-color: rgba(255, 215, 0, 0.3);">
+                <div class="method-emoji">🎯</div>
+                <h4 class="method-title text-gold">EMOZIONI CONTROLLATE</h4>
+                <p style="font-size: 0.9rem; line-height: 1.5;">
+                <strong>• Leadership naturale</strong> in campo<br>
+                <strong>• Visione di gioco</strong> e intelligenza tattica<br>
+                <strong>• Comunicazione efficace</strong> con i compagni<br>
+                <strong>• Controllo emotivo</strong> totale<br>
+                <strong>• Carisma e presenza</strong> in campo</p>
+                <div class="text-gold" style="font-size: 0.8rem; margin-top: 1rem; font-style: italic;">
+                    Risultato della mente allenata
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+            <div style="background: rgba(255, 107, 107, 0.15); border: 2px solid #FF6B6B; border-radius: 20px; padding: 2rem; max-width: 700px; margin: 0 auto 2rem;">
+                <p class="text-gold" style="font-size: clamp(1.3rem, 3vw, 1.7rem); font-weight: bold; margin-bottom: 1rem;">
+                    🧠 → ⚽ → 🎯
+                </p>
+                <p style="font-size: clamp(1.1rem, 2.5vw, 1.4rem);">
+                    <strong class="text-cyan">Prima</strong> sviluppiamo la mentalità vincente,<br>
+                    <strong class="text-cyan">poi</strong> usiamo la mente per allenare il corpo,<br>
+                    <strong class="text-cyan">infine</strong> le emozioni si allineano naturalmente.
+                </p>
+            </div>
+            <button class="btn" onclick="showStep(11)">
+                Geniale! Ma Funziona Davvero? 🤨
+            </button>
+        </div>
+    </section>
+
+    <!-- STEP 11: SOCIAL PROOF -->
+    <section class="section bg-proof hidden" id="section11">
+        <h2 class="section-title text-cyan">
+            I Risultati Parlano Chiaro
+        </h2>
+
+        <div style="text-align: center; max-width: 1000px;">
+            <div class="result-box">
+                <h3 class="text-gold" style="font-size: 1.8rem; margin-bottom: 2rem;">
+                    📊 Risultati Degli Ultimi 3 Anni
+                </h3>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin: 2rem 0;">
+                    <div>
+                        <div class="text-red" style="font-size: 2.5rem; font-weight: bold;">94%</div>
+                        <p>Ha migliorato le performance in campo</p>
+                    </div>
+                    <div>
+                        <div class="text-cyan" style="font-size: 2.5rem; font-weight: bold;">87%</div>
+                        <p>Ha aumentato la fiducia in se stesso</p>
+                    </div>
+                    <div>
+                        <div class="text-gold" style="font-size: 2.5rem; font-weight: bold;">91%</div>
+                        <p>Ha migliorato anche a scuola</p>
+                    </div>
+                    <div>
+                        <div class="text-red" style="font-size: 2.5rem; font-weight: bold;">98%</div>
+                        <p>I genitori sono completamente soddisfatti</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin: 3rem 0;">
+                <h4 class="text-gold" style="font-size: 1.5rem; margin-bottom: 2rem;">💬 Quello Che Dicono i Genitori:</h4>
+                
+                <div style="background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 15px; margin: 1rem 0;">
+                    <p style="font-style: italic; margin-bottom: 1rem;">
+                        "Mio figlio Marco era sempre in panchina. Dopo 2 mesi di Metodo Sincro è diventato titolare e capitano della squadra!"
+                    </p>
+                    <p class="text-cyan"><strong>- Alessandra, mamma di Marco (14 anni)</strong></p>
+                </div>
+                
+                <div style="background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 15px; margin: 1rem 0;">
+                    <p style="font-style: italic; margin-bottom: 1rem;">
+                        "Matteo piangeva dopo ogni partita. Ora sorride sempre e ha una fiducia incredibile. È diventato un altro bambino!"
+                    </p>
+                    <p class="text-gold"><strong>- Roberto, papà di Matteo (13 anni)</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn" onclick="showStep(12)">
+            Voglio Questi Risultati! Come Faccio? 🔥
+        </button>
+    </section>
+
+    <!-- STEP 12: FINAL CTA -->
+    <section class="section bg-final hidden" id="section12">
+        <h2 class="section-title text-gold">
+            La Tua Unica Possibilità
+        </h2>
+
+        <div class="final-container">
+            <h3 class="text-cyan" style="font-size: clamp(1.6rem, 4vw, 2.3rem); margin-bottom: 2rem;">
+                Chiamata Strategica Gratuita di 30 Minuti
+            </h3>
+            
+            <p style="font-size: clamp(1.2rem, 3vw, 1.6rem); margin-bottom: 2rem;">
+                ❌ <strong>NON è una vendita</strong><br>
+                ❌ <strong>NON è un corso standard</strong><br>
+                ❌ <strong>NON è per tutti</strong>
+            </p>
+            
+            <p style="font-size: clamp(1.3rem, 3vw, 1.7rem); margin-bottom: 2rem;">
+                ✅ <strong>È un'analisi personalizada</strong> della situazione di tuo figlio<br>
+                ✅ <strong>È una strategia su misura</strong> per i suoi problemi specifici<br>
+                ✅ <strong>È una valutazione onesta</strong> se possiamo aiutarlo
+            </p>
+            
+            <p class="text-gold" style="font-size: clamp(1.4rem, 4vw, 1.9rem); font-weight: bold; margin-bottom: 3rem;">
+                Se sei arrivato fino a qui... forse tuo figlio è proprio quello che stiamo cercando.
+            </p>
+            
+            <a href="https://calendly.com/advisors-metodosincro/portadingresso" target="_blank" class="btn btn-cta">
+                PRENOTA LA CHIAMATA STRATEGICA GRATUITA
+            </a>
+            
+            <p style="font-size: 1rem; opacity: 0.7; margin-top: 2rem;">
+                ⚠️ <strong>ATTENZIONE:</strong> Solo 20 chiamate disponibili questo mese<br>
+                🎯 <strong>100% GRATUITA:</strong> Nessun costo nascosto, solo valore puro<br>
+                ⏰ <strong>30 MINUTI:</strong> Sufficienti per cambiare tutto
+            </p>
+        </div>
+
+        <div style="margin-top: 3rem; max-width: 700px;">
+            <div class="result-box">
+                <h4 class="text-red" style="font-size: 1.4rem; font-weight: bold; margin-bottom: 1rem;">
+                    ⏱️ Il Tempo Sta Scadendo...
+                </h4>
+                <p style="font-size: 1.1rem;">
+                    Ogni giorno che passa è un giorno in meno per sviluppare la mentalità vincente di tuo figlio.<br><br>
+                    L'estate 2025 è la sua <strong class="text-gold">ultima grande occasione</strong> prima che diventi troppo difficile.
+                </p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+            <p style="font-size: 1.2rem; opacity: 0.8;">
+                Non lasciare che tra 10 anni tu e tuo figlio vi guardiate e diciate:<br>
+                <strong class="text-red">"E se avessimo almeno provato?"</strong>
+            </p>
+        </div>
+    </section>
+
+    <script>
+        var selectedProblem = null;
+
+        function showStep(stepNumber) {
+            var sections = document.querySelectorAll('.section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+                sections[i].classList.add('hidden');
+            }
+            
+            var targetSection = document.getElementById('section' + stepNumber);
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+                setTimeout(function() {
+                    targetSection.classList.add('active');
+                }, 100);
+                
+                document.getElementById('stepIndicator').textContent = stepNumber;
+            }
+        }
+
+        function selectProblem(element, problemNumber) {
+            var cards = document.querySelectorAll('.problem-card');
+            for (var i = 0; i < cards.length; i++) {
+                cards[i].classList.remove('selected');
+            }
+            
+            element.classList.add('selected');
+            selectedProblem = problemNumber;
+            
+            setTimeout(function() {
+                var result = document.getElementById('problemResult');
+                if (result) {
+                    result.classList.remove('hidden');
+                    result.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 800);
+        }
+    </script>
+</body>
+</html>
